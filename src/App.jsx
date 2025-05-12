@@ -4,8 +4,20 @@ import Die from './Die.jsx'
 import {nanoid} from "nanoid"
 function App() {
 
+     /**
+     * Challenge: Update the `hold` function to flip
+     * the `isHeld` property on the object in the array
+     * that was clicked, based on the `id` prop passed
+     * into the function.
+     * 
+     * Hint: as usual, there's more than one way to 
+     * accomplish this.
+     */ 
+
   function hold(id){
-    console.log(id)
+    setDice(prevDice => prevDice.map( die => {
+      return die.id === id? {...die, isHeld: !die.isHeld} : die
+    }))
   }
 
   function generateAllNewDice() {
