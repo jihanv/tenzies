@@ -18,6 +18,10 @@ function App() {
       <Die value={number} />
     )
   })
+  function rollDice(){
+    setDice(generateAllNewDice())
+
+  }
 
   return (
     <>
@@ -25,10 +29,10 @@ function App() {
         <div className="dice-container">
           {eachDie}
         </div>
+        <button className="roll-btn" onClick={rollDice}>Roll</button>
       </main>
     </>
   )
 }
-
 
 export default App
