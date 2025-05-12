@@ -4,6 +4,10 @@ import Die from './Die.jsx'
 import {nanoid} from "nanoid"
 function App() {
 
+  function hold(id){
+    console.log(id)
+  }
+
   function generateAllNewDice() {
     const dice = []
     for (let i = 0; i < 10; i++) {
@@ -20,7 +24,13 @@ function App() {
   const [dice, setDice] = useState(generateAllNewDice)
   const eachDie = dice.map((die) => {
     return(
-      <Die value={die.value} key={die.id} isHeld={die.isHeld}/>
+      <Die 
+        value={die.value} 
+        key={die.id} 
+        isHeld={die.isHeld} 
+        hold={hold} 
+        id={die.id}
+        />
     )
   })
   function rollDice(){
