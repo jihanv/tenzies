@@ -4,9 +4,7 @@ export default function Die(props) {
 
   return (
     <>
-        <button className="die">{props.value}</button>
+        <button className={props.isHeld? "die-held" : "die"}>{props.value}</button>
     </>
   )
 }
-
-
