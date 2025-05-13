@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Die from './Die.jsx'
 import { nanoid } from "nanoid"
@@ -8,8 +8,14 @@ import Confetti from 'react-confetti'
 
 function App() {
   const [dice, setDice] = useState(() => generateAllNewDice())
+const buttonRef = useRef(null)
+
   const { width, height } = useWindowSize()
-  const gameWon = dice.every(die => die.value === dice[0].value)
+  const gameWon = dice.every(die => die.value === dice[0].value) && dice.every(die => die.isHeld)
+
+  useEffect(()=> {
+    buttonRef.current.focus()
+  }, [gameWon])
   
   function reset(){
     setDice(generateAllNewDice)
@@ -61,7 +67,7 @@ function App() {
         <div className="dice-container">
           {eachDie}
         </div>
-        <button className="roll-btn" onClick={gameWon? reset: rollDice}>{gameWon? "New Game" : "Roll"}</button>
+        <button ref={buttonRef} className="roll-btn" onClick={gameWon? reset: rollDice}>{gameWon? "New Game" : "Roll"}</button>
       </main>
     </>
   )
