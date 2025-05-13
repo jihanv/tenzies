@@ -7,11 +7,13 @@ import Confetti from 'react-confetti'
 
 
 function App() {
-  const [dice, setDice] = useState(generateAllNewDice)
+  const [dice, setDice] = useState(() => generateAllNewDice())
   const { width, height } = useWindowSize()
-  const gameWon = (dice.every(die => die.value === dice[0].value)) && (dice.every(die => die.isHeld === true))
-    
-
+  const gameWon = dice.every(die => die.value === dice[0].value)
+  
+  function reset(){
+    setDice(generateAllNewDice)
+  }
   function hold(id) {
       setDice(prevDice => prevDice.map(die => {
         return die.id === id ? { ...die, isHeld: !die.isHeld } : die
@@ -58,7 +60,7 @@ function App() {
         <div className="dice-container">
           {eachDie}
         </div>
-        <button className="roll-btn" onClick={rollDice}>{gameWon? "New Game" : "Roll"}</button>
+        <button className="roll-btn" onClick={gameWon? reset: rollDice}>{gameWon? "New Game" : "Roll"}</button>
       </main>
     </>
   )
