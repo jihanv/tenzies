@@ -5,13 +5,8 @@ import { nanoid } from "nanoid"
 function App() {
   const [dice, setDice] = useState(generateAllNewDice)
 
-  let gameWon = false;
-  if((dice.every(die => die.value === dice[0].value)) && (dice.every(die => die.isHeld === true))){
-    gameWon = true
-  }
-  else{
-    gameWon = false;
-  }
+  const gameWon = (dice.every(die => die.value === dice[0].value)) && (dice.every(die => die.isHeld === true))
+    
 
   function hold(id) {
       setDice(prevDice => prevDice.map(die => {
